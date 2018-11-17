@@ -15,6 +15,12 @@ data=str(r.text)
 begin=data.find('"당신에게 이 나라는 어떤 의미가 있나요."')
 end=data.rfind('백수진 기자')
 a=data[begin:end]
+a=a.replace('이',' ');a=a.replace('교수는',' ') ; a=a.replace('있는',' ')
+a=a.replace('없었다',' ') ; a=a.replace('.',' ') ; a=a.replace('수',' ')
+a=a.replace('범죄를',' ') ; a=a.replace('범죄로',' ') ; a=a.replace('적이',' ')
+a=a.replace('것으로', ' ') ; a=a.replace('요인이',' ') ; a=a.replace('영향을',' ')
+a=a.replace('성향이', ' ') ; a=a.replace('같은',' ') ; a=a.replace('본',' ')
+a=a.replace('한',' ') ;a=a.replace('그는', ' ') 
 print(a)
 mydict={}
 a=a.split()
@@ -27,30 +33,32 @@ i=0
 for k in sorted(mydict, key=mydict.__getitem__, reverse=True):
         print('%s: %s'%(k,mydict[k]))
         i+=1
-        if i>19:
+        if i>30:
             break
+
+        
         
 import requests
-q=requests.get('http://monthly.chosun.com/client/news/viw.asp?ctcd=C&nNewsNumb=200812100052&page=26')
-q.encoding='utf8'
-dataq=str(q.text)
-beginq=dataq.find("지난 10월 20일 아침 8시15분.")
-endq=dataq.rfind("언제 터질지 모른다.⊙")
-b=dataq[beginq:endq]
+r=requests.get('http://monthly.chosun.com/client/news/viw.asp?ctcd=C&nNewsNumb=200812100052&page=26')
+r.encoding='utf8'
+data=str(r.text)
+begin=data.find("지난 10월 20일 아침 8시15분.")
+end=data.rfind("언제 터질지 모른다.⊙")
+b=data[begin:end]
 print(b)
 
-mydicta={}
+mydict={}
 b=b.split()
-for wa in b:
-    if wa in mydicta:
-        mydicta[wa]+=1
+for w in b:
+    if w in mydict:
+        mydict[w]+=1
     else:
-        mydicta[wa]=1
+        mydict[w]=1
 i=0
-for k in sorted(mydicta, key=mydicta.__getitem__, reverse=True):
-        print('%s: %s'%(k,mydicta[k]))
+for k in sorted(mydict, key=mydict.__getitem__, reverse=True):
+        print('%s: %s'%(k,mydict[k]))
         i+=1
-        if i>19:
+        if i>30:
             break
 
 
@@ -65,7 +73,7 @@ data=str(r.text)
 
 begin=data.find("IMF 경제위기 등을 겪으면서")
 end=data.rfind("새로운 가족 형태가 늘어난 것이다.")
-a=data[begin:end]
+a=data[begin:end+10]
 print(a)
 
 

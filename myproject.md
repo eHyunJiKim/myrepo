@@ -1,11 +1,34 @@
 #묻지마 범죄 최근 증가
 #살인범죄의 감소 추세에도 불구하고 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기
 
-import PyPDF2
-file=open('150828_보도자료(묻지마_범죄_대책_관련_유관기관_등_공동세미나_개최)-대검_강력부.pdf','rb')
-fileReader=PyPDF2.PdfFileReader(file)
-print()
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import Textconverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from io import StringIO
+def convert_pdf_to_txt():
+    rsrcmgr=PDFResourceManager()
+	retstr=StringIO()
+	codec='utf-8'
+	laparams=LAParams()
+	device=TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+	fp=open('150828_보도자료(묻지마_범죄_대책_관련_유관기관_등_공동세미나_개최)-대검_강력부.pdf', 'rb')
+	interpreter = PDFPageInterpreter(rsrcmgr, device)
+	password=""
+	maxpages=0
+	caching = True
+	pagenos=set()
+	
+	for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password, caching=caching, check_extractable=True):
+	    interpreter.process_page(page)
+	text=retstr.getvalue()
 
+    fp.close()
+    device.close()
+    retstr.close()
+    return text
+v=convert_pdf_to_txt()
+print(v)	
 #묻지마 범죄의 원인
 #신문기사에서 많이 나오는 단어 찾기 
 import requests
@@ -75,6 +98,4 @@ begin=data.find("IMF 경제위기 등을 겪으면서")
 end=data.rfind("새로운 가족 형태가 늘어난 것이다.")
 a=data[begin:end+10]
 print(a)
-
-
 

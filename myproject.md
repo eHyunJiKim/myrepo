@@ -1,32 +1,7 @@
 #묻지마 범죄 최근 증가
 #살인범죄의 감소 추세에도 불구하고 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기
 
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.converter import Textconverter
-from pdfminer.layout import LAParams
-from pdfminer.pdfpage import PDFPage
-from io import StringIO
-def convert_pdf_to_txt():
-    rsrcmgr=PDFResourceManager()
-	retstr=StringIO()
-	codec='utf-8'
-	laparams=LAParams()
-	device=TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
-	fp=open('150828_보도자료(묻지마_범죄_대책_관련_유관기관_등_공동세미나_개최)-대검_강력부.pdf', 'rb')
-	interpreter = PDFPageInterpreter(rsrcmgr, device)
-	password=""
-	maxpages=0
-	caching = True
-	pagenos=set()
-	
-	for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password, caching=caching, check_extractable=True):
-	    interpreter.process_page(page)
-	text=retstr.getvalue()
 
-    fp.close()
-    device.close()
-    retstr.close()
-    return text
 v=convert_pdf_to_txt()
 print(v)	
 #묻지마 범죄의 원인
@@ -44,7 +19,6 @@ a=a.replace('범죄를',' ') ; a=a.replace('범죄로',' ') ; a=a.replace('적�
 a=a.replace('것으로', ' ') ; a=a.replace('요인이',' ') ; a=a.replace('영향을',' ')
 a=a.replace('성향이', ' ') ; a=a.replace('같은',' ') ; a=a.replace('본',' ')
 a=a.replace('한',' ') ;a=a.replace('그는', ' ') 
-print(a)
 mydict={}
 a=a.split()
 for w in a:
@@ -63,12 +37,10 @@ for k in sorted(mydict, key=mydict.__getitem__, reverse=True):
         
 import requests
 r=requests.get('http://monthly.chosun.com/client/news/viw.asp?ctcd=C&nNewsNumb=200812100052&page=26')
-r.encoding='utf8'
 data=str(r.text)
 begin=data.find("지난 10월 20일 아침 8시15분.")
 end=data.rfind("언제 터질지 모른다.⊙")
 b=data[begin:end]
-print(b)
 
 mydict={}
 b=b.split()

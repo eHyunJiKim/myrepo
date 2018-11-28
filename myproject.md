@@ -1,5 +1,7 @@
 #묻지마 범죄 최근 증가
 #살인범죄의 감소 추세에도 불구하고 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기
+import textract
+text = textract.process("path/to/file.extension")
 import pyPdf
 
 def getPDFContent(path):

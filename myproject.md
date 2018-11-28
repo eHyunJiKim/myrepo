@@ -1,12 +1,22 @@
 #묻지마 범죄 최근 증가
 #살인범죄의 감소 추세에도 불구하고 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기
-import PyPDF2
-pdfFile0bj=open('150828_보도자료(묻지마_범죄_대책_관련_유관기관_등_공동세미나_개최)-대검_강력부.pdf', 'rb')
-pdfReader=PyPDF2.PdfFileReader(pdfFile0bj)
-print(pdfReader.numPages)
-page0bj=pdfReader.getPage(3)
-print(page0bj.extractText())
-pdfFile0bj.close()
+import pyPdf
+
+def getPDFContent(path):
+    content = ""
+    # Load PDF into pyPDF
+    pdf = pyPdf.PdfFileReader(file(path, "rb"))
+    # Iterate pages
+    for i in range(0, pdf.getNumPages()):
+        # Extract text from page and add to content
+        content += pdf.getPage(i).extractText() + "\n"
+    # Collapse whitespace
+    content = " ".join(content.replace("\xa0", " ").strip().split())
+    return content
+
+print (getPDFContent("150828_보도자료(묻지마_범죄_대책_관련_유관기관_등_공동세미나_개최)-대검_강력부.pdf"))
+
+
 
 
 

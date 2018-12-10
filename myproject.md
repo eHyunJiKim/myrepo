@@ -1,30 +1,12 @@
-#묻지마 범죄 최근 증가
-#살인범죄의 감소 추세에도 불구하고 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기
-import textract
-text = textract.process("path/to/file.extension")
-import pyPdf
-
-def getPDFContent(path):
-    content = ""
-    # Load PDF into pyPDF
-    pdf = pyPdf.PdfFileReader(file(path, "rb"))
-    # Iterate pages
-    for i in range(0, pdf.getNumPages()):
-        # Extract text from page and add to content
-        content += pdf.getPage(i).extractText() + "\n"
-    # Collapse whitespace
-    content = " ".join(content.replace("\xa0", " ").strip().split())
-    return content
-
-print (getPDFContent("150828_보도자료(묻지마_범죄_대책_관련_유관기관_등_공동세미나_개최)-대검_강력부.pdf"))
-
-
+# 주로 강력범죄와 연관성이 깊은 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기
+print("<강력범죄 발생 현황>")
 
 
 
 
 #묻지마 범죄의 원인
-#신문기사에서 많이 나오는 단어 찾기 
+#신문기사에서 많이 나오는 단어 찾기
+print("<묻지마 범죄와 연관된 단어>")
 import requests
 r=requests.get('https://news.joins.com/article/21615113')
 r.encoding='utf8'
@@ -95,7 +77,7 @@ for k in sorted(mydict, key=mydict.__getitem__, reverse=True):
 
 #묻지마 범죄자의 원인
 #IMF  가정해체         
-
+print("<원인>")
 import requests
 r=requests.get('http://news.chosun.com/site/data/html_dir/2009/07/25/2009072500040.html')
 r.encoding='utf8'

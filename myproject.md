@@ -1,15 +1,33 @@
-#주로 강려범죄와 연관성이 깊은 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기 
+#강력범죄의 증가 
 print("<강력범죄 발생 현황>")
-
 import pandas as pd
-data=pd.read_excel('Report.xls')
+data=pd.read_excel('복사본Report.xls')
 print(data.loc[[1,2,3,4,5,6,7,8,9,10,11],['기간','강력범']])
 
 
+#최근 이슈가 되고 있는 소년범죄(강력범죄)와 심신미약
+#소년범죄자 범행시 정신상태
+         
+print("<소년범죄자 범행시 정신상태>")
+data=pd.read_excel('소년범죄자_성별_범행시_정신상태_.xls')
+print(data.loc[[1,2,3,4,5,6,7,8,9,10],['2016']])
+
+print("분석 : 강력범죄를 저지르는 소년범죄자들이 정신장애나 주취와 같은 정신감정을 요구하는 경우가 많이 발생하고 있다.")
+
+
+#정신감정의 의뢰 : 문제점
+import requests
+r=requests.get("http://news.heraldcorp.com/view.php?ud=20181128000429")
+r.encoding='utf8'
+data=str(r.text)
+begin=data.find("실제로 현행 형법에 따르면")
+end=data.rfind('이에 대한 반대 여론이 최근 거세진 것으로 보인다."고 설명했다.')
+a=data[begin:end+1]
+print(a)
 
 
 
-
+#최근 지속적으로 발생하고 있는 묻지마 범죄의 특성
 print("<묻지마 범죄와 연관된 단어>")
 import requests
 r=requests.get('https://news.joins.com/article/21615113')

@@ -1,5 +1,6 @@
 #주로 강려범죄와 연관성이 깊은 묻지마 범죄는 최근 3년간 매년 54~55건이 지속적으로 발생하여 국민 불안을 야기 
 print("<강력범죄 발생 현황>")
+
 import pandas as pd
 data=pd.read_excel('Report.xls')
 print(data.loc[[1,2,3,4,5,6,7,8,9,10,11],['기간','강력범']])

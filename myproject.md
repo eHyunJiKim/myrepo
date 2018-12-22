@@ -3,17 +3,23 @@
 print("<강력범죄 발생 현황>")
 import pandas as pd
 data=pd.read_excel('복사본Report.xls')
-print(data.loc[[1,2,3,4,5,6,7,8,9,10,11],['기간','강력범']])
+print(data.loc[[1,2,3,4,5,6,7,8,9,10,11],['기간','강력범']]
+print("분석 : 매년 강력범죄가 증가하는 추세이다.")
 
-
-#최근 이슈가 되고 있는 소년범죄(강력범죄)와 심신미약
+#소년 범죄자들이 최근 정신감정을 통해 심신미약을 주장하려는 사례가 늘어가고 있다. 
 #소년범죄자 범행시 정신상태
-         
-print("<소년범죄자 범행시 정신상태>")
-data=pd.read_excel('소년범죄자_성별_범행시_정신상태_.xls')
-print(data.loc[[14],['강력범죄(흉악)', '정신장애']])  
+import openpyxl
+data=openpyxl.load_workbook('data.xlsx')
+sheet=data['데이터']
+cells=sheet['J14': 'J18']
+disorder_total=dict()
+for row in cells:
+    for cell in row:
+        discorder_total[sheet.cell(cell.row,3).value]=cell.value
+print("강력범죄(흉악) 범죄 시 정신장애")
+print(disorder_total)
 
-print("분석 : 강력범죄를 저지르는 소년범죄자들이 정신장애나 주취와 같은 정신감정을 요구하는 경우가 많이 발생하고 있다.")
+print("분석 : 강력범죄를 저지르는 소년범죄자들이 정신장애와 연관이 많은 것으로 보아, 소년범죄자들이 범행 당시 정신장애가 있었음을 주장하며 정신감정을 요구하는 경우가 많이 발생하고 있다는 사실을 알 수 있다.")
 
 
 #정신감정의 의뢰 : 문제점
@@ -128,8 +134,9 @@ if "흉기를" in mydict:
 if "‘은둔형" in mydict:
     print("은둔형: 묻지마 범죄자는 은둔형 성향을 가지고 있으며 이로 부터 느낀 고립감을 사회에 분노로  표출하려고 하는 경향이 있다.")
 if "고립" in mydict:
+    
     print("고립 : 묻지마 범죄자는 은둔형 성향을 가지고 있으며 이로 부터 느낀 고립감을 사회에 분노로  표출하려고 하는 경향이 있다.")
-if "분노" in mydict
+if "분노" in mydict:
     print("분노: 묻지마 범죄자는 은둔형 성향을 가지고 있으며 이로 부터 느낀 고립감을 사회에 분노로  표출하려고 하는 경향이 있다.")
 
           
@@ -144,3 +151,4 @@ begin=data.find("IMF 경제위기 등을 겪으면서")
 end=data.rfind("새로운 가족 형태가 늘어난 것이다.")
 a=data[begin:end+27]
 print(a)
+

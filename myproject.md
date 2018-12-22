@@ -16,7 +16,18 @@ disorder_total=dict()
 for row in cells:
     for cell in row:
         discorder_total[sheet.cell(cell.row,3).value]=cell.value
-print("강력범죄(흉악) 범죄 시 정신장애")
+print("강력범죄(흉악)시 정신장애")
+print(disorder_total)
+
+import openpyxl
+data = openpyxl.load_workbook('data.xlsx')
+sheet = data['데이터']
+cells = sheet['J19':'J27'] 
+disorder_total = dict()
+for row in cells:
+    for cell in row: 
+        disorder_total[sheet.cell(cell.row,3).value]= cell.value
+print("강력범죄(폭력)시 정신장애")
 print(disorder_total)
 
 print("분석 : 강력범죄를 저지르는 소년범죄자들이 정신장애와 연관이 많은 것으로 보아, 소년범죄자들이 범행 당시 정신장애가 있었음을 주장하며 정신감정을 요구하는 경우가 많이 발생하고 있다는 사실을 알 수 있다.")

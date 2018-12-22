@@ -41,6 +41,7 @@ data=str(r.text)
 begin=data.find("실제로 현행 형법에 따르면")
 end=data.rfind('이에 대한 반대 여론이 최근 거세진 것으로 보인다."고 설명했다.')
 a=data[begin:end+1]
+a=a.replace('&|dquo;', ' ') ; a=a.replace('&rdquo;',' ') ; a==a.replace('&ldquo;',' ')
 print(a)
 
 
